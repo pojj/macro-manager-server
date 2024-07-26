@@ -10,6 +10,13 @@ const signUp = express.Router();
 export default signUp;
 
 signUp.get("/", async (req, res) => {
+  res.cookie("auth", "token", {
+    httpOnly: true,
+    secure: false,
+    maxAge: 1000 * 60,
+    sameSite: "Lax",
+  });
+
   res.status(405).json({
     error: "Method Not Allowed",
     message: "This endpoint only accepts POST requests.",
